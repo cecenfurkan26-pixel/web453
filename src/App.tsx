@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MessageCircle, Smile, Award, Users, Shield, Clock, Phone, Mail, MapPin, Calendar, User, MessageSquare, ChevronDown } from 'lucide-react';
+import { MessageCircle, Smile, Award, Users, Shield, Clock, Phone, Mail, MapPin, Calendar, User, MessageSquare, ChevronDown, Menu, X } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '905XXXXXXXXX';
 
@@ -10,6 +10,8 @@ function App() {
     service: '',
     message: ''
   });
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,30 +38,81 @@ function App() {
               <Smile className="h-8 w-8 text-teal-600" />
               <span className="ml-2 text-2xl font-bold text-gray-900">Dental Klinik</span>
             </div>
-            <nav className="hidden md:flex space-x-8">
+            <nav className="hidden lg:flex space-x-8">
               <a href="#anasayfa" className="text-gray-700 hover:text-teal-600 transition-colors">Anasayfa</a>
               <a href="#hizmetler" className="text-gray-700 hover:text-teal-600 transition-colors">Hizmetlerimiz</a>
               <a href="#hakkimizda" className="text-gray-700 hover:text-teal-600 transition-colors">Hakkımızda</a>
               <a href="#iletisim" className="text-gray-700 hover:text-teal-600 transition-colors">İletişim</a>
             </nav>
-            <a
-              href="#iletisim"
-              className="bg-teal-600 text-white px-6 py-2 rounded-full hover:bg-teal-700 transition-colors"
-            >
-              Randevu Al
-            </a>
+
+            <div className="flex items-center gap-4">
+              <a
+                href="#iletisim"
+                className="bg-teal-600 text-white px-4 sm:px-6 py-2 rounded-full hover:bg-teal-700 transition-colors text-sm sm:text-base"
+              >
+                Randevu Al
+              </a>
+
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden p-2 text-gray-700 hover:text-teal-600 transition-colors"
+                aria-label="Menüyü aç"
+              >
+                {mobileMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Navigation Drawer */}
+          {mobileMenuOpen && (
+            <nav className="lg:hidden pb-6 border-t border-gray-200">
+              <div className="space-y-3 pt-6">
+                <a
+                  href="#anasayfa"
+                  className="block text-gray-700 hover:text-teal-600 transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Anasayfa
+                </a>
+                <a
+                  href="#hizmetler"
+                  className="block text-gray-700 hover:text-teal-600 transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Hizmetlerimiz
+                </a>
+                <a
+                  href="#hakkimizda"
+                  className="block text-gray-700 hover:text-teal-600 transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Hakkımızda
+                </a>
+                <a
+                  href="#iletisim"
+                  className="block text-gray-700 hover:text-teal-600 transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  İletişim
+                </a>
+              </div>
+            </nav>
+          )}
         </div>
       </header>
 
       {/* Hero Section */}
-      <section id="anasayfa" className="relative bg-gradient-to-br from-teal-50 to-white py-20">
+      <section id="anasayfa" className="relative bg-gradient-to-br from-teal-50 to-white py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Gülüşünüz Bizim İşimiz
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
               Modern teknolojiyi deneyimli ekibimizle birleştirerek size en kaliteli diş sağlığı hizmetini sunuyoruz.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -84,37 +137,37 @@ function App() {
       </section>
 
       {/* Services Section */}
-      <section id="hizmetler" className="py-20 bg-white">
+      <section id="hizmetler" className="py-16 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Hizmetlerimiz</h2>
-            <p className="text-xl text-gray-600">Kapsamlı diş sağlığı çözümleri</p>
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">Hizmetlerimiz</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600">Kapsamlı diş sağlığı çözümleri</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-br from-teal-50 to-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            <div className="bg-gradient-to-br from-teal-50 to-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
               <div className="bg-teal-600 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                 <Smile className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Genel Diş Bakımı</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Genel Diş Bakımı</h3>
+              <p className="text-sm sm:text-base text-gray-600">
                 Rutin kontroller, diş temizliği ve koruyucu tedavilerle diş sağlığınızı koruyoruz.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-teal-50 to-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
+            <div className="bg-gradient-to-br from-teal-50 to-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
               <div className="bg-teal-600 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                 <Award className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Estetik Diş Hekimliği</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Estetik Diş Hekimliği</h3>
+              <p className="text-sm sm:text-base text-gray-600">
                 Diş beyazlatma, porselen laminalar ve gülüş tasarımı ile hayal ettiğiniz gülüşe kavuşun.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-teal-50 to-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
+            <div className="bg-gradient-to-br from-teal-50 to-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
               <div className="bg-teal-600 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                 <Shield className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">İmplant Tedavisi</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">İmplant Tedavisi</h3>
+              <p className="text-sm sm:text-base text-gray-600">
                 En son teknoloji implant sistemleri ile eksik dişlerinizi doğal görünümlü şekilde tamamlıyoruz.
               </p>
             </div>
@@ -123,37 +176,37 @@ function App() {
       </section>
 
       {/* About Section */}
-      <section id="hakkimizda" className="py-20 bg-gradient-to-br from-teal-50 to-white">
+      <section id="hakkimizda" className="py-16 sm:py-20 bg-gradient-to-br from-teal-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Neden Bizi Seçmelisiniz?</h2>
-            <p className="text-xl text-gray-600">Gülüşünüz için en iyisini sunuyoruz</p>
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">Neden Bizi Seçmelisiniz?</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600">Gülüşünüz için en iyisini sunuyoruz</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             <div className="text-center">
-              <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <Users className="h-10 w-10 text-teal-600" />
+              <div className="bg-white w-16 sm:w-20 h-16 sm:h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <Users className="h-8 sm:h-10 w-8 sm:w-10 text-teal-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Deneyimli Ekip</h3>
-              <p className="text-gray-600">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">Deneyimli Ekip</h3>
+              <p className="text-sm sm:text-base text-gray-600">
                 Alanında uzman diş hekimlerimiz ve modern ekipmanlarımızla hizmetinizdeyiz.
               </p>
             </div>
             <div className="text-center">
-              <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <Shield className="h-10 w-10 text-teal-600" />
+              <div className="bg-white w-16 sm:w-20 h-16 sm:h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <Shield className="h-8 sm:h-10 w-8 sm:w-10 text-teal-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Güvenli Tedavi</h3>
-              <p className="text-gray-600">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">Güvenli Tedavi</h3>
+              <p className="text-sm sm:text-base text-gray-600">
                 Sterilizasyon ve hijyen kurallarına azami özen göstererek güvenli tedavi sunuyoruz.
               </p>
             </div>
             <div className="text-center">
-              <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <Award className="h-10 w-10 text-teal-600" />
+              <div className="bg-white w-16 sm:w-20 h-16 sm:h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <Award className="h-8 sm:h-10 w-8 sm:w-10 text-teal-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Kaliteli Hizmet</h3>
-              <p className="text-gray-600">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3">Kaliteli Hizmet</h3>
+              <p className="text-sm sm:text-base text-gray-600">
                 Hasta memnuniyetini ön planda tutarak en kaliteli hizmeti vermeyi hedefliyoruz.
               </p>
             </div>
@@ -162,17 +215,17 @@ function App() {
       </section>
 
       {/* Contact & Appointment Section */}
-      <section id="iletisim" className="py-20 bg-gray-50">
+      <section id="iletisim" className="py-16 sm:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">İletişim ve Randevu</h2>
-            <p className="text-xl text-gray-600">Size en uygun zamanda randevu alın</p>
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">İletişim ve Randevu</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600">Size en uygun zamanda randevu alın</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
             {/* Sol Sütun - Randevu Formu */}
-            <div className="bg-white p-8 rounded-2xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Hemen Randevu Alın</h3>
+            <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Hemen Randevu Alın</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -268,10 +321,10 @@ function App() {
             </div>
 
             {/* Sağ Sütun - İletişim Bilgileri */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {/* İletişim Bilgileri */}
-              <div className="bg-white p-8 rounded-2xl shadow-lg">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">İletişim Bilgileri</h3>
+              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">İletişim Bilgileri</h3>
                 <div className="space-y-6">
                   <div className="flex items-start">
                     <div className="bg-teal-100 p-3 rounded-full">
@@ -348,9 +401,9 @@ function App() {
               </div>
 
               {/* Google Maps Placeholder */}
-              <div className="bg-white p-8 rounded-2xl shadow-lg">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Konum</h3>
-                <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Konum</h3>
+                <div className="w-full h-48 sm:h-64 bg-gray-200 rounded-lg flex items-center justify-center">
                   <div className="text-center">
                     <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-2" />
                     <p className="text-gray-500 font-medium">Google Maps</p>
@@ -366,20 +419,20 @@ function App() {
       {/* Footer */}
       <footer className="bg-teal-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8">
             <div>
               <div className="flex items-center mb-4">
                 <Smile className="h-8 w-8 text-white" />
-                <span className="ml-2 text-xl font-bold">Dental Klinik</span>
+                <span className="ml-2 text-lg sm:text-xl font-bold">Dental Klinik</span>
               </div>
-              <p className="text-teal-200">
+              <p className="text-sm sm:text-base text-teal-200">
                 Gülüşünüz bizim işimiz. Modern diş hekimliği çözümleriyle hizmetinizdeyiz.
               </p>
             </div>
 
             <div>
-              <h4 className="text-lg font-semibold mb-4">Hızlı Bağlantılar</h4>
-              <ul className="space-y-2">
+              <h4 className="text-base sm:text-lg font-semibold mb-4">Hızlı Bağlantılar</h4>
+              <ul className="space-y-2 text-sm sm:text-base">
                 <li>
                   <a href="#anasayfa" className="text-teal-200 hover:text-white transition-colors">Anasayfa</a>
                 </li>
@@ -396,8 +449,8 @@ function App() {
             </div>
 
             <div>
-              <h4 className="text-lg font-semibold mb-4">Çalışma Saatleri</h4>
-              <div className="space-y-1 text-teal-200">
+              <h4 className="text-base sm:text-lg font-semibold mb-4">Çalışma Saatleri</h4>
+              <div className="space-y-1 text-sm sm:text-base text-teal-200">
                 <p>Pazartesi - Cumartesi</p>
                 <p className="font-semibold text-white">10:00 - 20:00</p>
                 <p className="mt-2">Pazar</p>
@@ -407,7 +460,7 @@ function App() {
           </div>
 
           <div className="border-t border-teal-800 pt-8 text-center">
-            <p className="text-teal-200">
+            <p className="text-sm sm:text-base text-teal-200">
               © 2026 Dental Klinik. Tüm hakları saklıdır.
             </p>
           </div>
